@@ -3,61 +3,172 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Site Under Maintenance</title>
+  <title>Mohamed Althaf | Cybersecurity & Network Engineering Blog</title>
   <style>
+    /* Reset and base styles */
+    * {
+      box-sizing: border-box;
+    }
     body {
-      margin: 0;
-      padding: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f0f2f5;
-      color: #333;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
-    }
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 0.5rem;
-      color: #0078d7;
-    }
-    p {
-      font-size: 1.25rem;
-      margin-bottom: 1.5rem;
-      max-width: 400px;
-    }
-    .logo {
-      width: 100px;
-      margin-bottom: 2rem;
-    }
-    footer {
-      position: absolute;
-      bottom: 10px;
-      font-size: 0.9rem;
-      color: #666;
+      margin: 0;
+      line-height: 1.6;
+      background: #f5f7fa;
+      color: #222;
     }
     a {
-      color: #0078d7;
+      color: #0077cc;
       text-decoration: none;
     }
     a:hover {
       text-decoration: underline;
     }
+    header {
+      background: #003366;
+      color: white;
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-weight: 700;
+      font-size: 2.5rem;
+    }
+    header p {
+      margin-top: 0.5rem;
+      font-size: 1.2rem;
+      font-style: italic;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    main {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    section {
+      margin-bottom: 3rem;
+    }
+    h2 {
+      border-bottom: 3px solid #0077cc;
+      padding-bottom: 0.3rem;
+      margin-bottom: 1rem;
+      color: #003366;
+    }
+    .about p,
+    .contact p {
+      max-width: 700px;
+      margin: 0 auto 1rem auto;
+    }
+    .featured-post, .latest-posts {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 3px 8px rgb(0 0 0 / 0.1);
+    }
+    .post-title {
+      font-weight: 700;
+      font-size: 1.3rem;
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+      color: #004080;
+    }
+    .post-excerpt {
+      margin-bottom: 1rem;
+      color: #444;
+    }
+    .post-link {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: #0077cc;
+    }
+    ul.post-list {
+      list-style: none;
+      padding-left: 0;
+    }
+    ul.post-list li {
+      margin-bottom: 1.2rem;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #003366;
+      color: white;
+      font-size: 0.9rem;
+    }
+    /* Responsive */
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.8rem;
+      }
+      header p {
+        font-size: 1rem;
+      }
+    }
   </style>
 </head>
 <body>
-  <!-- You can replace this with your logo image if you have one -->
-  <img src="https://cdn-icons-png.flaticon.com/512/565/565547.png" alt="Maintenance Icon" class="logo" />
-  <h1>We'll Be Back Soon!</h1>
-  <p>
-    Our website is currently undergoing scheduled maintenance.<br />
-    We’re working hard to improve your experience.<br />
-    Thank you for your patience.
-  </p>
-  <p>If you need immediate assistance, please <a href="mailto:support@talfah.online">contact us</a>.</p>
+  <header>
+    <h1>Mohamed Althaf</h1>
+    <p>Cybersecurity & Network Engineering Journey</p>
+  </header>
 
-  <footer>&copy; 2025 talfah.online. All rights reserved.</footer>
+  <main>
+    <section class="intro">
+      <h2>Welcome to My Blog!</h2>
+      <p>Hi, I’m Mohamed Althaf — a passionate Network Systems Engineering student, budding System Administrator, and cybersecurity enthusiast. This blog is my space to share projects, tutorials, insights, and career tips as I navigate the world of cybersecurity and network engineering.</p>
+      <p>Whether you're interested in Red Team, Blue Team, DevSecOps, or just curious about cybersecurity, you'll find something here to inspire and inform you.</p>
+    </section>
+
+    <section class="about">
+      <h2>About Me</h2>
+      <p>I am pursuing a BSc (Hons) in Network Systems Engineering at the University of Sunderland. Previously, I completed a Higher Diploma in Network Technology and Cyber Security. I’ve hands-on experience with tools like Wazuh, pfSense, MySQL, and Active Directory.</p>
+      <p>My journey began with curiosity about how systems work behind the scenes, which evolved into a passion for securing them. I enjoy exploring both offensive and defensive cybersecurity techniques.</p>
+    </section>
+
+    <section class="featured-post">
+      <h2>Featured Post</h2>
+      <h3 class="post-title">Discovering a Security Misconfiguration: My Responsible Disclosure Story</h3>
+      <p class="post-excerpt">Recently, I uncovered a security misconfiguration on a company's website exposing sensitive personal data. This experience reinforced that cybersecurity is about mindset as much as technology.</p>
+      <a href="#" class="post-link">Read More &rarr;</a>
+    </section>
+
+    <section class="latest-posts">
+      <h2>Latest Posts</h2>
+      <ul class="post-list">
+        <li>
+          <a href="#" class="post-title">How to Set Up a Secure Network for a Startup</a><br />
+          <small>Lessons from my AI-Solutions Project</small>
+        </li>
+        <li>
+          <a href="#" class="post-title">Introduction to DevSecOps</a><br />
+          <small>Bridging Development, Security, and Operations</small>
+        </li>
+        <li>
+          <a href="#" class="post-title">Understanding Steganography</a><br />
+          <small>Securing Communications with Hidden Messages</small>
+        </li>
+        <li>
+          <a href="#" class="post-title">Real-Time Password Strength Checking</a><br />
+          <small>Building a User-Friendly Login System</small>
+        </li>
+      </ul>
+    </section>
+
+    <section class="contact">
+      <h2>Connect with Me</h2>
+      <p>Feel free to reach out or follow me on social platforms:</p>
+      <p>
+        LinkedIn: <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer">linkedin.com/in/yourprofile</a><br />
+        GitHub: <a href="https://github.com/althafnm" target="_blank" rel="noopener noreferrer">github.com/althafnm</a><br />
+        Email: <a href="mailto:your.email@example.com">your.email@example.com</a>
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 Mohamed Althaf — All rights reserved.
+  </footer>
 </body>
 </html>
