@@ -3,1231 +3,553 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Althaf Navaskhan - Network Security Administrator</title>
+    <title>Althaf Navaskhan - Professional Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter Font from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-        
-        :root {
-            --primary-bg: #0a0a0b;
-            --secondary-bg: #111115;
-            --card-bg: #1a1a20;
-            --accent: #00f5ff;
-            --accent-secondary: #ff006e;
-            --text-primary: #ffffff;
-            --text-secondary: #a8a8b3;
-            --text-muted: #666670;
-            --border: #2a2a35;
-            --glow: rgba(0, 245, 255, 0.15);
-            --success: #00ff88;
-            --warning: #ff9500;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background: var(--primary-bg);
-            color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
-            position: relative;
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
         }
-
-        /* Animated Background */
-        .background-grid {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -2;
-            opacity: 0.03;
-            background-image: 
-                linear-gradient(90deg, var(--accent) 1px, transparent 1px),
-                linear-gradient(0deg, var(--accent) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: gridMove 20s linear infinite;
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
         }
-
-        @keyframes gridMove {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(50px, 50px); }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
         }
-
-        .cyber-particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
         }
-
-        .particle {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: var(--accent);
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: #3b82f6; /* Blue-500 */
             border-radius: 50%;
-            opacity: 0.6;
-            animation: float 6s infinite ease-in-out;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
         }
-
-        .particle:nth-child(odd) {
-            animation-duration: 8s;
-            background: var(--accent-secondary);
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
-
-        @keyframes float {
-            0%, 100% { 
-                transform: translateY(100vh) translateX(0);
-                opacity: 0;
-            }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-        }
-
-        /* Navigation */
-        .nav {
-            position: fixed;
+        /* Basic Modal Styling */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
             top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            background: rgba(10, 10, 11, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-            padding: 1rem 0;
-            transition: all 0.3s ease;
-        }
-
-        .nav-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            justify-content: center;
             align-items: center;
         }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            background: linear-gradient(45deg, var(--accent), var(--accent-secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent);
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        /* Main Container */
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            padding-top: 100px;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 90vh;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            position: relative;
-            margin-bottom: 6rem;
-        }
-
-        .hero-content {
-            flex: 1;
-            max-width: 600px;
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: rgba(0, 245, 255, 0.1);
-            border: 1px solid var(--accent);
-            border-radius: 50px;
-            padding: 0.5rem 1rem;
-            font-size: 0.9rem;
-            color: var(--accent);
-            margin-bottom: 2rem;
-            animation: glow 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes glow {
-            0% { box-shadow: 0 0 5px var(--glow); }
-            100% { box-shadow: 0 0 20px var(--glow), 0 0 30px var(--glow); }
-        }
-
-        .hero h1 {
-            font-size: clamp(3rem, 8vw, 5rem);
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--text-primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero-subtitle {
-            font-size: 1.5rem;
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-            font-weight: 300;
-        }
-
-        .hero-description {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            margin-bottom: 3rem;
-            line-height: 1.8;
-        }
-
-        .hero-stats {
-            display: flex;
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .stat {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--accent);
-            display: block;
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
-
-        .hero-cta {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 1rem 2rem;
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
             border-radius: 8px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            border: none;
-            cursor: pointer;
-            font-family: inherit;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
-            color: var(--primary-bg);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0, 245, 255, 0.3);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--text-primary);
-            border: 1px solid var(--border);
-        }
-
-        .btn-secondary:hover {
-            background: var(--card-bg);
-            border-color: var(--accent);
-        }
-
-        /* Hero Visual */
-        .hero-visual {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-        }
-
-        .terminal {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            width: 400px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-        }
-
-        .terminal-header {
-            background: var(--secondary-bg);
-            padding: 1rem;
-            border-radius: 12px 12px 0 0;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .terminal-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-
-        .dot-red { background: #ff5f56; }
-        .dot-yellow { background: #ffbd2e; }
-        .dot-green { background: #27ca3f; }
-
-        .terminal-content {
-            padding: 1.5rem;
-            font-family: 'Monaco', 'Courier New', monospace;
-            font-size: 0.9rem;
-            line-height: 1.6;
-        }
-
-        .terminal-line {
-            margin-bottom: 0.5rem;
-            animation: typewriter 0.1s steps(1);
-        }
-
-        .terminal-prompt {
-            color: var(--accent);
-        }
-
-        .terminal-command {
-            color: var(--success);
-        }
-
-        .terminal-output {
-            color: var(--text-secondary);
-        }
-
-        /* Sections */
-        .section {
-            margin-bottom: 8rem;
-            position: relative;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .section-badge {
-            display: inline-block;
-            background: rgba(255, 0, 110, 0.1);
-            border: 1px solid var(--accent-secondary);
-            border-radius: 50px;
-            padding: 0.5rem 1rem;
-            font-size: 0.9rem;
-            color: var(--accent-secondary);
-            margin-bottom: 1rem;
-        }
-
-        .section-title {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--text-primary), var(--text-secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .section-subtitle {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* Skills Grid */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .skill-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 2rem;
-            position: relative;
-            transition: all 0.3s ease;
-            overflow: hidden;
-        }
-
-        .skill-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .skill-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        }
-
-        .skill-card:hover::before {
-            opacity: 1;
-        }
-
-        .skill-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .skill-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        .skill-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .skill-tag {
-            background: var(--secondary-bg);
-            border: 1px solid var(--border);
-            color: var(--text-secondary);
-            padding: 0.4rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            transition: all 0.3s ease;
-        }
-
-        .skill-tag:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-            background: rgba(0, 245, 255, 0.1);
-        }
-
-        /* Experience Timeline */
-        .timeline {
-            position: relative;
-            padding: 2rem 0;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            top: 0;
-            bottom: 0;
-            width: 3px;
-            background: linear-gradient(to bottom, var(--accent), var(--accent-secondary));
-            transform: translateX(-50%);
-            border-radius: 2px;
-        }
-
-        .timeline-item {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 4rem;
-            position: relative;
-        }
-
-        .timeline-item:nth-child(odd) .timeline-content {
-            margin-right: 50%;
-            margin-left: 0;
-            padding-right: 3rem;
-        }
-
-        .timeline-item:nth-child(even) .timeline-content {
-            margin-left: 50%;
-            margin-right: 0;
-            padding-left: 3rem;
-        }
-
-        .timeline-content {
-            flex: 1;
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 2rem;
-            position: relative;
-            transition: all 0.3s ease;
-            max-width: 450px;
-        }
-
-        .timeline-content::before {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 0;
-            top: 2rem;
-            border: 10px solid transparent;
-        }
-
-        .timeline-item:nth-child(odd) .timeline-content::before {
-            right: -20px;
-            border-left-color: var(--border);
-        }
-
-        .timeline-item:nth-child(even) .timeline-content::before {
-            left: -20px;
-            border-right-color: var(--border);
-        }
-
-        .timeline-content:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .timeline-content:hover::before {
-            border-left-color: var(--accent);
-            border-right-color: var(--accent);
-        }
-
-        .timeline-date {
-            position: absolute;
-            left: 50%;
-            top: 1.5rem;
-            transform: translateX(-50%);
-            background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
-            color: var(--primary-bg);
-            padding: 0.7rem 1.5rem;
-            border-radius: 25px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            z-index: 10;
-            border: 3px solid var(--primary-bg);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        .timeline-node {
-            position: absolute;
-            left: 50%;
-            top: 2rem;
-            transform: translateX(-50%);
-            width: 16px;
-            height: 16px;
-            background: var(--accent);
-            border-radius: 50%;
-            border: 4px solid var(--primary-bg);
-            z-index: 5;
-            box-shadow: 0 0 20px var(--glow);
-        }
-
-        .job-title {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .company {
-            color: var(--accent);
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        .achievements {
-            list-style: none;
-        }
-
-        .achievements li {
-            position: relative;
-            padding-left: 1.5rem;
-            margin-bottom: 0.5rem;
-            color: var(--text-secondary);
-        }
-
-        .achievements li::before {
-            content: '▶';
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-        }
-
-        /* Project Showcase */
-        .project-showcase {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 3rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .project-showcase::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(0, 245, 255, 0.05), rgba(255, 0, 110, 0.05));
-            z-index: -1;
-        }
-
-        .project-badge {
-            display: inline-block;
-            background: var(--success);
-            color: var(--primary-bg);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .project-title {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-        }
-
-        .project-description {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: var(--text-secondary);
-        }
-
-        /* Certifications */
-        .certs-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .cert-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 2rem;
-            text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cert-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(0, 245, 255, 0.1), transparent);
-            transform: rotate(45deg);
-            transition: all 0.6s ease;
-            opacity: 0;
-        }
-
-        .cert-card:hover::before {
-            animation: shimmer 1.5s ease-in-out;
-        }
-
-        @keyframes shimmer {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); opacity: 0; }
-            50% { opacity: 1; }
-            100% { transform: translateX(100%) translateY(100%) rotate(45deg); opacity: 0; }
-        }
-
-        .cert-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .cert-icon {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .cert-title {
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: var(--text-primary);
-        }
-
-        .cert-issuer {
-            color: var(--accent);
-            font-size: 0.9rem;
-        }
-
-        /* Contact Section */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .contact-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 2rem;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .contact-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent);
-        }
-
-        .contact-icon {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            display: block;
-        }
-
-        .contact-info {
-            color: var(--text-secondary);
-        }
-
-        .contact-link {
-            color: var(--accent);
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--secondary-bg);
-            border-top: 1px solid var(--border);
-            padding: 4rem 0 2rem;
-            margin-top: 8rem;
-            position: relative;
-        }
-
-        .footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
-        }
-
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-            margin-bottom: 3rem;
-        }
-
-        .footer-section h3 {
-            color: var(--text-primary);
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            position: relative;
-        }
-
-        .footer-section h3::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 30px;
-            height: 2px;
-            background: var(--accent);
-            border-radius: 1px;
-        }
-
-        .footer-links {
-            list-style: none;
-            padding: 0;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.5rem;
-        }
-
-        .footer-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: color 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .footer-links a:hover {
-            color: var(--accent);
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .social-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-link:hover {
-            background: var(--accent);
-            color: var(--primary-bg);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 245, 255, 0.3);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border);
-        }
-
-        .footer-bottom p {
-            color: var(--text-muted);
-            margin: 0;
-        }
-
-        .footer-logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            background: linear-gradient(45deg, var(--accent), var(--accent-secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 1rem;
-        }
-
-        .memberships {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-            margin-bottom: 2rem;
-        }
-
-        .membership {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 1rem 1.5rem;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-        }
-
-        .membership:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
-
-        /* Maintenance Modal */
-        .maintenance-modal {
-            display: none;
-            position: fixed;
-            z-index: 10000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-        }
-
-        .maintenance-content {
-            background: var(--card-bg);
-            margin: 10% auto;
-            padding: 3rem;
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            width: 90%;
+            width: 80%; /* Could be responsive */
             max-width: 500px;
-            text-align: center;
-            position: relative;
-            animation: slideInUp 0.3s ease-out;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-
-        .maintenance-close {
-            color: var(--text-secondary);
+        .close-button {
+            color: #aaa;
             float: right;
             font-size: 28px;
             font-weight: bold;
-            position: absolute;
-            top: 1rem;
-            right: 1.5rem;
+        }
+        .close-button:hover,
+        .close-button:focus {
+            color: black;
+            text-decoration: none;
             cursor: pointer;
-            transition: color 0.3s ease;
-        }
-
-        .maintenance-close:hover {
-            color: var(--accent);
-        }
-
-        .maintenance-icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            display: block;
-        }
-
-        .maintenance-title {
-            color: var(--text-primary);
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .maintenance-text {
-            color: var(--text-secondary);
-            line-height: 1.6;
-            margin-bottom: 2rem;
-        }
-
-        /* Responsive Design */
-            @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            
-            .hero {
-                flex-direction: column;
-                text-align: center;
-                padding: 2rem 0;
-            }
-            
-            .hero-visual {
-                margin-top: 2rem;
-            }
-            
-            .terminal {
-                width: 100%;
-                max-width: 350px;
-            }
-            
-            .timeline::before {
-                left: 30px;
-            }
-            
-            .timeline-item:nth-child(odd) .timeline-content,
-            .timeline-item:nth-child(even) .timeline-content {
-                margin-left: 60px;
-                margin-right: 0;
-                padding-left: 1.5rem;
-                padding-right: 1.5rem;
-                max-width: none;
-            }
-            
-            .timeline-item:nth-child(odd) .timeline-content::before,
-            .timeline-item:nth-child(even) .timeline-content::before {
-                left: -20px;
-                right: auto;
-                border-right-color: var(--border);
-                border-left-color: transparent;
-            }
-            
-            .timeline-content:hover::before {
-                border-right-color: var(--accent);
-                border-left-color: transparent;
-            }
-            
-            .timeline-date {
-                left: 30px;
-                transform: none;
-                font-size: 0.8rem;
-                padding: 0.5rem 1rem;
-            }
-            
-            .timeline-node {
-                left: 30px;
-            }
-            
-            .hero-stats {
-                justify-content: center;
-            }
-            
-            .section-title {
-                font-size: 2rem;
-            }
-            
-            .skills-grid,
-            .certs-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-grid {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-            
-            .social-links {
-                justify-content: center;
-            }
-        }
-
-        /* Loading Animation */
-        .loading {
-            opacity: 0;
-            animation: fadeInUp 0.8s ease-out forwards;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
     </style>
 </head>
-<body>
-    <!-- Animated Background -->
-    <div class="background-grid"></div>
-    <div class="cyber-particles" id="particles"></div>
+<body class="bg-gray-50 text-gray-800">
 
-    <!-- Navigation -->
-    <nav class="nav">
-        <div class="nav-container">
-            <div class="logo">ALTHAF.DEV</div>
-            <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
+    <!-- Header & Navigation -->
+    <header class="bg-white shadow-md fixed w-full z-50">
+        <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#home" class="text-2xl font-bold text-blue-600 hover:text-blue-800 transition duration-300">Althaf Navaskhan</a>
+            <ul class="flex space-x-6">
+                <li><a href="#home" class="text-gray-700 hover:text-blue-600 font-medium transition duration-300">Home</a></li>
+                <li><a href="#skills" class="text-gray-700 hover:text-blue-600 font-medium transition duration-300">Skills</a></li>
+                <li><a href="#projects" class="text-700 hover:text-blue-600 font-medium transition duration-300">Projects</a></li>
+                <li><a href="#memberships" class="text-gray-700 hover:text-blue-600 font-medium transition duration-300">Memberships</a></li>
+                <li><a href="#contact" class="text-gray-700 hover:text-blue-600 font-medium transition duration-300">Contact</a></li>
             </ul>
-        </div>
-    </nav>
+        </nav>
+    </header>
 
-    <div class="container">
-        <!-- Hero Section -->
-        <section class="hero loading">
-            <div class="hero-content">
-                <div class="hero-badge">
-                    🔐 Available for Cybersecurity Roles
+    <main>
+        <!-- Hero/About Section -->
+        <section id="home" class="relative bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-20 md:py-32 flex items-center min-h-screen">
+            <div class="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between">
+                <div class="md:w-1/2 text-center md:text-left mb-10 md:mb-0">
+                    <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4">Hi, I'm <span class="text-yellow-300">Althaf Navaskhan</span></h1>
+                    <p class="text-xl md:text-2xl font-light mb-6">A passionate <span class="font-semibold">Network & Cyber Security Professional</span> dedicated to building robust, secure systems.🔐</p>
+                    <a href="#projects" class="inline-block bg-yellow-400 text-gray-900 font-semibold px-8 py-3 rounded-full shadow-lg hover:bg-yellow-300 transform hover:scale-105 transition duration-300">View My Work</a>
                 </div>
-                <h1>ALTHAF NAVASKHAN</h1>
-                <p class="hero-subtitle">Network Security Administrator</p>
-                <p class="hero-description">
-                    Specialized in enterprise network security, firewall management, and threat detection. 
-                    Building secure infrastructure and protecting digital assets with cutting-edge cybersecurity solutions.
-                </p>
-                
-                <div class="hero-stats">
-                    <div class="stat">
-                        <span class="stat-number">99%</span>
-                        <span class="stat-label">Network Uptime</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number">40%</span>
-                        <span class="stat-label">Vulnerability Reduction</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number">100+</span>
-                        <span class="stat-label">Users Supported</span>
-                    </div>
-                </div>
-
-                <div class="hero-cta">
-                    <a href="#contact" class="btn btn-primary">Get In Touch</a>
-                    <a href="#projects" class="btn btn-secondary">View Projects</a>
+                <div class="md:w-1/3 flex justify-center md:justify-end">
+                    <!-- ACTION REQUIRED: Replace with your professional headshot URL. Example: "images/althaf_profile.jpg" -->
+                    <img src="https://placehold.co/300x300/F0F9FF/000000?text=Althaf+Navaskhan+Profile" alt="Althaf Navaskhan Profile Photo" class="w-64 h-64 md:w-80 md:h-80 rounded-full shadow-xl object-cover border-4 border-white">
                 </div>
             </div>
+        </section>
 
-            <div class="hero-visual">
-                <div class="terminal">
-                    <div class="terminal-header">
-                        <div class="terminal-dot dot-red"></div>
-                        <div class="terminal-dot dot-yellow"></div>
-                        <div class="terminal-dot dot-green"></div>
+        <!-- About Me Section (part of home) -->
+        <section class="bg-gray-100 py-16">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl font-bold text-center text-gray-900 mb-8">About Me</h2>
+                <div class="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-md">
+                    <p class="text-lg text-gray-700 leading-relaxed mb-4">
+                        My journey into technology started with a simple question: How do things work behind the scenes? This curiosity led me to networks, systems, and ultimately, cybersecurity—where I found my true passion.
+                    </p>
+                    <p class="text-lg text-gray-700 leading-relaxed mb-4">
+                        With hands-on experience in both network management and cybersecurity, I’ve developed a solid foundation in securing infrastructures, troubleshooting systems, and ensuring reliable communication. My goal is to combine my expertise in both networking and security, applying my skills to build robust, secure systems.🔐
+                    </p>
+                    <p class="text-lg text-gray-700 leading-relaxed">
+                        Excited to continue learning and exploring new opportunities in the dynamic world of technology.🚀
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="bg-white py-16">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl font-bold text-center text-gray-900 mb-12">Experience</h2>
+                <div class="max-w-3xl mx-auto bg-gray-50 p-8 rounded-lg shadow-md">
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-blue-700">Trainee System Administrator</h3>
+                        <p class="text-xl text-gray-600">hSenid Mobile Solutions (Pvt) Ltd, Colombo, Sri Lanka</p>
+                        <p class="text-gray-500">Jan 2025 - Jul 2026</p>
+                        <ul class="list-disc list-inside text-gray-700 text-lg mt-4">
+                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Assisted in configuring and monitoring network devices (switches, routers, firewalls), helping maintain **99% network availability**.</li>
+                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Supported firewall rule implementation, contributing to a **25% improvement** in traffic filtering and access control.</li>
+                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Helped deploy VLANs and basic network segmentation, enhancing internal security by **30%**.</li>
+                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Participated in system hardening and patch management, reducing vulnerabilities by **40%** through routine updates.</li>
+                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Provided support for Active Directory tasks such as user creation, password resets, and group management for 100+ users.</li>
+                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Monitored endpoint protection tools and reported security alerts, assisting in reducing malware incidents by **50%**.</li>
+                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Assisted in data backup verification and basic disaster recovery tests with zero data loss during trial runs.</li>
+                        </ul>
                     </div>
-                    <div class="terminal-content">
-                        <div class="terminal-line">
-                            <span class="terminal-prompt">root@security:~$</span> 
-                            <span class="terminal-command">nmap -sS -O target_network</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" class="bg-gray-100 py-16">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl font-bold text-center text-gray-900 mb-12">Education</h2>
+                <div class="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-md">
+                    <div class="mb-6 flex items-start">
+                        <!-- ACTION REQUIRED: Replace with University of Sunderland logo -->
+                        <img src="https://placehold.co/60x60/D1E7DD/0A5333?text=SU" alt="University of Sunderland Logo" class="w-16 h-16 rounded-full mr-4 object-contain flex-shrink-0">
+                        <div>
+                            <h3 class="text-2xl font-semibold text-blue-700">BSc (Hons) Network Systems Engineering</h3>
+                            <p class="text-xl text-gray-600">University Of Sunderland</p>
+                            <p class="text-gray-500">Expected Graduation: Nov 2024</p>
+                            <ul class="list-disc list-inside text-gray-700 text-lg mt-4">
+                                <li><i class="fas fa-graduation-cap text-blue-500 mr-2"></i>Focus Areas: Advanced Cyber Security, Advanced Routing, Telecommunication, IT Service Management</li>
+                            </ul>
                         </div>
-                        <div class="terminal-line terminal-output">Starting Nmap scan...</div>
-                        <div class="terminal-line terminal-output">Host is up (0.001s latency)</div>
-                        <div class="terminal-line terminal-output">PORT     STATE SERVICE</div>
-                        <div class="terminal-line terminal-output">22/tcp   open  ssh</div>
-                        <div class="terminal-line terminal-output">443/tcp  open  https</div>
-                        <div class="terminal-line">
-                            <span class="terminal-prompt">root@security:~$</span> 
-                            <span class="terminal-command">firewall --status secure</span>
+                    </div>
+                    <div class="flex items-start">
+                        <!-- ACTION REQUIRED: Replace with Cardiff Metropolitan University logo -->
+                        <img src="https://placehold.co/60x60/FFF3CD/664D03?text=CMU" alt="Cardiff Metropolitan University Logo" class="w-16 h-16 rounded-full mr-4 object-contain flex-shrink-0">
+                        <div>
+                            <h3 class="text-2xl font-semibold text-blue-700">Higher Diploma in Network Technology and Cyber Security</h3>
+                            <p class="text-xl text-gray-600">Cardiff Metropolitan University</p>
+                            <p class="text-gray-500">Completed: Nov 2022</p>
+                            <ul class="list-disc list-inside text-gray-700 text-lg mt-4">
+                                <li><i class="fas fa-graduation-cap text-blue-500 mr-2"></i>Focused on Network Technology and Cyber Security principles.</li>
+                            </ul>
                         </div>
-                        <div class="terminal-line" style="color: var(--success);">✓ All systems protected</div>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Skills Section -->
-        <section class="section loading" id="skills">
-            <div class="section-header">
-                <div class="section-badge">Technical Expertise</div>
-                <h2 class="section-title">Core Competencies</h2>
-                <p class="section-subtitle">
-                    Advanced skills in network security, infrastructure management, and cybersecurity frameworks
-                </p>
-            </div>
-
-            <div class="skills-grid">
-                <div class="skill-card">
-                    <div class="skill-icon">🔥</div>
-                    <h3 class="skill-title">Firewall Management</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Fortinet</span>
-                        <span class="skill-tag">PFsense</span>
-                        <span class="skill-tag">Palo Alto</span>
+        <section id="skills" class="bg-white py-16">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl font-bold text-center text-gray-900 mb-12">My Skills & Certifications</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                    <!-- Skill Card 1: Networking -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
+                        <h3 class="text-2xl font-semibold text-blue-700 mb-3"><i class="fas fa-network-wired mr-2"></i> Networking</h3>
+                        <ul class="list-disc list-inside text-gray-700 text-lg">
+                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>LAN/WAN Design</li>
+                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>VPN Configuration</li>
+                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Routing Protocols (OSPF, BGP)</li>
+                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Switching (VLANs, Spanning Tree)</li>
+                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Wireless Networking (Wi-Fi 6, Meraki)</li>
+                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Network Monitoring & Troubleshooting</li>
+                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Network Support</li>
+                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Home Networking</li>
+                        </ul>
                     </div>
-                </div>
-
-                <div class="skill-card">
-                    <div class="skill-icon">🌐</div>
-                    <h3 class="skill-title">Network Infrastructure</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Cisco IOS</span>
-                        <span class="skill-tag">VLANs</span>
-                        <span class="skill-tag">STP</span>
-                        <span class="skill-tag">OSPF</span>
-                        <span class="skill-tag">EIGRP</span>
-                        <span class="skill-tag">BGP</span>
+                    <!-- Skill Card 2: Cybersecurity & Firewall Management -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
+                        <h3 class="text-2xl font-semibold text-blue-700 mb-3"><i class="fas fa-shield-alt mr-2"></i> Cybersecurity & Firewall</h3>
+                        <ul class="list-disc list-inside text-gray-700 text-lg">
+                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Firewall Management (Cisco ASA, Palo Alto, Fortigate, Pfsense)</li>
+                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Network Security</li>
+                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Ethical Hacking</li>
+                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>API Hacking</li>
+                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Application Security (OWASP)</li>
+                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Cyber Threat Intelligence</li>
+                        </ul>
                     </div>
-                </div>
-
-                <div class="skill-card">
-                    <div class="skill-icon">📡</div>
-                    <h3 class="skill-title">Network Protocols</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">TCP/IP</span>
-                        <span class="skill-tag">NAT</span>
-                        <span class="skill-tag">DHCP</span>
-                        <span class="skill-tag">DNS</span>
-                        <span class="skill-tag">Subnetting</span>
-                        <span class="skill-tag">ACLs</span>
+                    <!-- Skill Card 3: Operating Systems & Tools -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
+                        <h3 class="text-2xl font-semibold text-blue-700 mb-3"><i class="fas fa-desktop mr-2"></i> OS & Tools</h3>
+                        <ul class="list-disc list-inside text-gray-700 text-lg">
+                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Windows Server</li>
+                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Linux (Ubuntu, CentOS)</li>
+                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Wireshark</li>
+                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Microsoft Office Suite</li>
+                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>IT Consulting</li>
+                        </ul>
                     </div>
-                </div>
-
-                <div class="skill-card">
-                    <div class="skill-icon">🛠️</div>
-                    <h3 class="skill-title">Security Tools</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Wireshark</span>
-                        <span class="skill-tag">Nmap</span>
-                        <span class="skill-tag">Packet Tracer</span>
-                        <span class="skill-tag">Active Directory</span>
+                    <!-- Skill Card 4: Professional Certifications -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
+                        <h3 class="text-2xl font-semibold text-blue-700 mb-3"><i class="fas fa-award mr-2"></i> Professional Certifications</h3>
+                        <ul class="list-disc list-inside text-gray-700 text-lg">
+                            <li class="flex items-center mb-1"><img src="https://placehold.co/24x24/FFFFFF/000000?text=ISC" alt="ISC2 Logo" class="h-6 w-6 mr-2 object-contain"><span class="flex-grow">(ISC) Certified in Cybersecurity (CC)</span></li>
+                            <li class="flex items-center mb-1"><img src="https://placehold.co/24x24/FFFFFF/000000?text=Cisco" alt="Cisco Logo" class="h-6 w-6 mr-2 object-contain"><span class="flex-grow">CISCO Certified Network Associate Routing and Switching (CCNA)</span></li>
+                            <li class="flex items-center mb-1"><img src="https://placehold.co/24x24/FFFFFF/000000?text=CNSP" alt="CNSP Logo" class="h-6 w-6 mr-2 object-contain"><span class="flex-grow">Certified Network Security Practitioner (CNSP)</span></li>
+                            <li class="flex items-center mb-1"><img src="https://placehold.co/24x24/FFFFFF/000000?text=Google" alt="Google Logo" class="h-6 w-6 mr-2 object-contain"><span class="flex-grow">Google IT Support Specialist</span></li>
+                            <li class="flex items-center mb-1"><img src="https://placehold.co/24x24/FFFFFF/000000?text=EC-C" alt="EC-Council Logo" class="h-6 w-6 mr-2 object-contain"><span class="flex-grow">EC-Council Certified Secure Computer User (CSCU)</span></li>
+                            <li class="flex items-center mb-1"><img src="https://placehold.co/24x24/FFFFFF/000000?text=Fortinet" alt="Fortinet Logo" class="h-6 w-6 mr-2 object-contain"><span class="flex-grow">Fortinet Certified Associate in Cybersecurity</span></li>
+                            <li class="flex items-center mb-1"><img src="https://placehold.co/24x24/FFFFFF/000000?text=CAPIE" alt="CAPIE Logo" class="h-6 w-6 mr-2 object-contain"><span class="flex-grow">CAPIE – Certified API Hacking Expert</span></li>
+                        </ul>
                     </div>
-                </div>
-
-                <div class="skill-card">
-                    <div class="skill-icon">🔒</div>
-                    <h3 class="skill-title">Cybersecurity</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">IPS</span>
-                        <span class="skill-tag">Endpoint Protection</span>
-                        <span class="skill-tag">System Hardening</span>
-                        <span class="skill-tag">Threat Analysis</span>
+                    <!-- Skill Card 5: Course Completions -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
+                        <h3 class="text-2xl font-semibold text-blue-700 mb-3"><i class="fas fa-book-open mr-2"></i> Key Course Completions</h3>
+                        <ul class="list-disc list-inside text-gray-700 text-lg">
+                            <li class="flex items-center mb-1"><img src="https://placehold.co/24x24/FFFFFF/000000?text=Udemy" alt="Udemy Logo" class="h-6 w-6 mr-2 object-contain"><span class="flex-grow">The Complete Cyber Security Course: Network Security (Udemy)</span></li>
+                            <li class="flex items-center mb-1"><img src="https://placehold.co/24x24/FFFFFF/000000?text=Udemy" alt="Udemy Logo" class="h-6 w-6 mr-2 object-contain"><span class="flex-grow">Learn Ethical Hacking From Scratch 2024 (Udemy)</span></li>
+                            <li class="flex items-center mb-1"><img src="https://placehold.co/24x24/FFFFFF/000000?text=EC-C" alt="EC-Council Logo" class="h-6 w-6 mr-2 object-contain"><span class="flex-grow">Offensive Perspective - OWASP Security for Developers (EC-Council)</span></li>
+                            <li class="flex items-center mb-1"><img src="https://placehold.co/24x24/FFFFFF/000000?text=Coursera" alt="Coursera Logo" class="h-6 w-6 mr-2 object-contain"><span class="flex-grow">Cyber Threat Intelligence (Coursera/IBM)</span></li>
+                            <li class="flex items-center mb-1"><img src="https://placehold.co/24x24/FFFFFF/000000?text=Coursera" alt="Coursera Logo" class="h-6 w-6 mr-2 object-contain"><span class="flex-grow">Introduction to Cybersecurity Tools & Cyber Attacks (Coursera/IBM)</span></li>
+                            <li class="flex items-center mb-1"><img src="https://placehold.co/24x24/FFFFFF/000000?text=Coursera" alt="Coursera Logo" class="h-6 w-6 mr-2 object-contain"><span class="flex-grow">Cybersecurity Roles, Processes & Operating System Security (Coursera/IBM)</span></li>
+                            <li class="flex items-center mb-1"><img src="https://placehold.co/24x24/FFFFFF/000000?text=Cisco" alt="Cisco Logo" class="h-6 w-6 mr-2 object-contain"><span class="flex-grow">Cybersecurity Essentials (Cisco)</span></li>
+                            <li class="flex items-center mb-1"><img src="https://placehold.co/24x24/FFFFFF/000000?text=Cisco" alt="Cisco Logo" class="h-6 w-6 mr-2 object-contain"><span class="flex-grow">Introduction to Cybersecurity (Cisco)</span></li>
+                        </ul>
                     </div>
-                </div>
-
-                <div class="skill-card">
-                    <div class="skill-icon">⚙️</div>
-                    <h3 class="skill-title">System Administration</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">CLI Configuration</span>
-                        <span class="skill-tag">Backup Systems</span>
-                        <span class="skill-tag">Network Monitoring</span>
-                        <span class="skill-tag">Disaster Recovery</span>
+                    <!-- Skill Card 6: Soft Skills & Professionalism -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
+                        <h3 class="text-2xl font-semibold text-blue-700 mb-3"><i class="far fa-comments mr-2"></i> Soft Skills</h3>
+                        <ul class="list-disc list-inside text-gray-700 text-lg">
+                            <li><i class="fas fa-lightbulb text-indigo-500 mr-2"></i>Analytical Thinking</li>
+                            <li><i class="fas fa-lightbulb text-indigo-500 mr-2"></i>Problem-Solving & Troubleshooting</li>
+                            <li><i class="fas fa-lightbulb text-indigo-500 mr-2"></i>Attention to Detail</li>
+                            <li><i class="fas fa-lightbulb text-indigo-500 mr-2"></i>Technical Communication</li>
+                            <li><i class="fas fa-lightbulb text-indigo-500 mr-2"></i>Time Management & Prioritization</li>
+                            <li><i class="fas fa-lightbulb text-indigo-500 mr-2"></i>Team Collaboration</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Experience Section -->
-        <section class="section loading" id="experience">
-            <div class="section-header">
-                <div class="section-badge">Professional Journey</div>
-                <h2 class="section-title">Experience</h2>
-            </div>
+        <!-- Projects Section -->
+        <section id="projects" class="bg-gray-100 py-16">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl font-bold text-center text-gray-900 mb-12">My Projects</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                    <!-- Project Card 1: Enterprise COMSEC Tactical Framework -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition duration-300">
+                        <!-- ACTION REQUIRED: Replace with an image or diagram representing this project -->
+                        <img src="https://placehold.co/600x400/D9EDF7/0C5460?text=COMSEC+Framework+Project" alt="Enterprise COMSEC Tactical Framework" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="project-title text-2xl font-semibold text-blue-700 mb-2">Enterprise COMSEC Tactical Framework with Decoy Steganography</h3>
+                            <p class="project-description text-gray-700 mb-4">Engineered a secure, two-node military communication framework ensuring superior data confidentiality by integrating PGP encryption with OpenPuff steganography. This solution covertly embeds sensitive, encrypted information within audio files, establishing a robust communication channel that mitigates critical vulnerabilities commonly found in traditional VPNs and enhances resilience against evolving cyber threats.</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-blue-100 text-blue-800 text-sm font-medium px-2.5 py-0.5 rounded-full">PGP Encryption</span>
+                                <span class="bg-green-100 text-green-800 text-sm font-medium px-2.5 py-0.5 rounded-full">Steganography (OpenPuff)</span>
+                                <span class="bg-yellow-100 text-yellow-800 text-sm font-medium px-2.5 py-0.5 rounded-full">Network Security</span>
+                                <span class="bg-purple-100 text-purple-800 text-sm font-medium px-2.5 py-0.5 rounded-full">Cybersecurity</span>
+                            </div>
+                            <div class="flex justify-between items-center mt-4">
+                                <a href="#" target="_blank" class="text-blue-600 hover:text-blue-800 font-medium transition duration-300">Learn More &rarr;</a>
+                                <!-- If no live demo/GitHub, consider linking to a detailed project report/case study -->
+                            </div>
+                            <button class="generate-desc-btn w-full mt-4 bg-purple-500 text-white font-semibold py-2 rounded-lg shadow hover:bg-purple-600 transition duration-300 flex items-center justify-center">
+                                <span class="loading-spinner hidden spinner mr-2"></span> Generate Description ✨
+                            </button>
+                        </div>
+                    </div>
 
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-date">2025-2026</div>
-                    <div class="timeline-content">
-                        <h3 class="job-title">Trainee System Administrator</h3>
-                        <p class="company
+                    <!-- Project Card 2: Havoc Framework Article -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition duration-300">
+                        <!-- ACTION REQUIRED: Replace with an image relevant to ethical hacking/Havoc Framework, e.g., a terminal screenshot -->
+                        <img src="https://placehold.co/600x400/FFF3CD/664D03?text=Havoc+Framework+Article" alt="Havoc Framework Article" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="project-title text-2xl font-semibold text-blue-700 mb-2">Exploring Open-Source Security Tools: Havoc Framework</h3>
+                            <p class="project-description text-gray-700 mb-4">Authored an article delving into the Havoc Framework, an open-source post-exploitation tool. The article explores setting up the environment, managing listeners, and payloads, demonstrating how security professionals can simulate real-world scenarios to strengthen defenses. This publication highlights the responsible and ethical use of powerful security tools for penetration testing.</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-purple-100 text-purple-800 text-sm font-medium px-2.5 py-0.5 rounded-full">Ethical Hacking</span>
+                                <span class="bg-pink-100 text-pink-800 text-sm font-medium px-2.5 py-0.5 rounded-full">Penetration Testing</span>
+                                <span class="bg-blue-100 text-blue-800 text-sm font-medium px-2.5 py-0.5 rounded-full">Open Source Tools</span>
+                                <span class="bg-green-100 text-green-800 text-sm font-medium px-2.5 py-0.5 rounded-full">Cybersecurity Research</span>
+                            </div>
+                            <div class="flex justify-between items-center mt-4">
+                                <a href="https://lnkd.in/gzhTRTzy" target="_blank" class="text-blue-600 hover:text-blue-800 font-medium transition duration-300">Read Article &rarr;</a>
+                            </div>
+                            <button class="generate-desc-btn w-full mt-4 bg-purple-500 text-white font-semibold py-2 rounded-lg shadow hover:bg-purple-600 transition duration-300 flex items-center justify-center">
+                                <span class="loading-spinner hidden spinner mr-2"></span> Generate Description ✨
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Project Card 3: Placeholder for a future project -->
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition duration-300">
+                        <!-- ACTION REQUIRED: Replace with an image for your next project -->
+                        <img src="https://placehold.co/600x400/CCE5FF/004085?text=Future+Project" alt="Future Project" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="project-title text-2xl font-semibold text-blue-700 mb-2">Next Big Project (e.g., Network Automation Script)</h3>
+                            <p class="project-description text-gray-700 mb-4">This space is ready for your next significant project! Perhaps a network automation script you've developed, a security hardening tool, or a new research endeavor. Describe its purpose, technologies used, and your key contributions.</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-red-100 text-red-800 text-sm font-medium px-2.5 py-0.5 rounded-full">Automation</span>
+                                <span class="bg-gray-100 text-gray-800 text-sm font-medium px-2.5 py-0.5 rounded-full">Scripting</span>
+                                <span class="bg-indigo-100 text-indigo-800 text-sm font-medium px-2.5 py-0.5 rounded-full">Data Analysis</span>
+                            </div>
+                            <div class="flex justify-between items-center mt-4">
+                                <a href="#" target="_blank" class="text-blue-600 hover:text-blue-800 font-medium transition duration-300">Live Demo &rarr;</a>
+                                <a href="#" target="_blank" class="text-gray-600 hover:text-gray-800 font-medium transition duration-300">GitHub &rarr;</a>
+                            </div>
+                            <button class="generate-desc-btn w-full mt-4 bg-purple-500 text-white font-semibold py-2 rounded-lg shadow hover:bg-purple-600 transition duration-300 flex items-center justify-center">
+                                <span class="loading-spinner hidden spinner mr-2"></span> Generate Description ✨
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Professional Memberships Section -->
+        <section id="memberships" class="bg-white py-16">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl font-bold text-center text-gray-900 mb-12">Professional Memberships</h2>
+                <div class="max-w-3xl mx-auto bg-gray-50 p-8 rounded-lg shadow-md">
+                    <ul class="list-none space-y-4 text-gray-700 text-lg">
+                        <li class="flex items-center">
+                            <!-- ACTION REQUIRED: Replace with ISC2 Colombo Chapter logo -->
+                            <img src="https://placehold.co/40x40/FFFFFF/000000?text=ISC2" alt="ISC2 Colombo Chapter Logo" class="h-10 w-10 object-contain rounded-full mr-4 flex-shrink-0">
+                            <span class="font-medium">ISC2 Colombo Chapter</span> - Active Member
+                        </li>
+                        <li class="flex items-center">
+                            <!-- ACTION REQUIRED: Replace with ISACA logo -->
+                            <img src="https://placehold.co/40x40/FFFFFF/000000?text=ISACA" alt="ISACA Student Group Logo" class="h-10 w-10 object-contain rounded-full mr-4 flex-shrink-0">
+                            <span class="font-medium">ISACA Student Group</span> - Committee Member
+                        </li>
+                        <li class="flex items-center">
+                            <!-- ACTION REQUIRED: Replace with The Computer Society of Sri Lanka (CSSL) logo -->
+                            <img src="https://placehold.co/40x40/FFFFFF/000000?text=CSSL" alt="The Computer Society of Sri Lanka (CSSL) Logo" class="h-10 w-10 object-contain rounded-full mr-4 flex-shrink-0">
+                            <span class="font-medium">The Computer Society of Sri Lanka (CSSL)</span> - Member (ID: S19726)
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Contact Section -->
+        <section id="contact" class="bg-gradient-to-r from-blue-600 to-indigo-700 py-16 text-white">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="text-4xl font-bold mb-12">Get In Touch</h2>
+                <p class="text-xl mb-8 max-w-2xl mx-auto">
+                    I'm always open to new opportunities and collaborations. Feel free to reach out!
+                </p>
+                <div class="max-w-xl mx-auto bg-white p-8 rounded-lg shadow-xl text-gray-800">
+                    <form action="YOUR_FORM_SUBMISSION_URL" method="POST" class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-left text-lg font-medium text-gray-700 mb-2">Name</label>
+                            <input type="text" id="name" name="name" required
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition duration-200"
+                                placeholder="John Doe">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-left text-lg font-medium text-gray-700 mb-2">Email</label>
+                            <input type="email" id="email" name="email" required
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition duration-200"
+                                placeholder="you@example.com">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-left text-lg font-medium text-gray-700 mb-2">Message</label>
+                            <textarea id="message" name="message" rows="5" required
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition duration-200"
+                                placeholder="Tell me about your project or inquiry..."></textarea>
+                        </div>
+                        <button type="submit"
+                            class="w-full bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 transform hover:scale-105 transition duration-300">
+                            Send Message
+                        </button>
+                    </form>
+                    <p class="mt-8 text-gray-600 text-center">
+                        Alternatively, you can reach me directly at <a href="mailto:althafnm@protonmail.com" class="text-blue-600 hover:underline">althafnm@protonmail.com</a> or connect on <a href="https://www.linkedin.com/in/althafnavaskhan/" target="_blank" class="text-blue-600 hover:underline">LinkedIn</a>.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 text-center">
+        <div class="container mx-auto px-4">
+            <p>&copy; <span id="currentYear"></span> Althaf Navaskhan. All rights reserved.</p>
+            <div class="mt-4 flex justify-center space-x-6">
+                <!-- ACTION REQUIRED: Update your GitHub profile link -->
+                <a href="https://github.com/yourusername" target="_blank" class="text-gray-400 hover:text-white transition duration-300">
+                    <i class="fab fa-github fa-2x"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/althafnavaskhan/" target="_blank" class="text-gray-400 hover:text-white transition duration-300">
+                    <i class="fab fa-linkedin fa-2x"></i>
+                </a>
+                <a href="mailto:althafnm@protonmail.com" class="text-gray-400 hover:text-white transition duration-300">
+                    <i class="fas fa-envelope fa-2x"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Error/Message Modal -->
+    <div id="messageModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <p id="modalMessage" class="text-gray-700 text-lg"></p>
+        </div>
+    </div>
+
+    <script>
+        // Set current year in the footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Function to show modal message
+        function showModalMessage(message) {
+            const modal = document.getElementById('messageModal');
+            const modalMessage = document.getElementById('modalMessage');
+            modalMessage.textContent = message;
+            modal.style.display = 'flex'; // Use flex to center
+        }
+
+        // Get the <span> element that closes the modal
+        const closeButton = document.querySelector('.close-button');
+        closeButton.onclick = function() {
+            document.getElementById('messageModal').style.display = 'none';
+        }
+
+        // Close the modal when clicking outside of the content
+        window.onclick = function(event) {
+            const modal = document.getElementById('messageModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Gemini API integration for project description generation
+        document.querySelectorAll('.generate-desc-btn').forEach(button => {
+            button.addEventListener('click', async function() {
+                const projectCard = this.closest('.bg-white');
+                const projectTitle = projectCard.querySelector('.project-title').textContent;
+                const projectDescriptionElement = projectCard.querySelector('.project-description');
+                const currentDescription = projectDescriptionElement.textContent;
+                const spinner = this.querySelector('.loading-spinner');
+                const buttonTextSpan = this.childNodes[this.childNodes.length - 1]; // Get the text node/span of the button
+
+                // Show spinner and disable button
+                spinner.classList.remove('hidden');
+                buttonTextSpan.textContent = 'Generating...';
+                this.disabled = true;
+
+                let chatHistory = [];
+                const prompt = `Given the following project title and current description, generate a more detailed and engaging description (around 100-150 words). Focus on the project's impact, challenges overcome, and key takeaways.
+Project Title: ${projectTitle}
+Current Description: ${currentDescription}`;
+                chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+
+                const payload = { contents: chatHistory };
+                const apiKey = ""; // If you want to use models other than gemini-2.5-flash-preview-05-20 or imagen-3.0-generate-002, provide an API key here. Otherwise, leave this as-is.
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+
+                let attempts = 0;
+                const maxAttempts = 5;
+                let delay = 1000; // 1 second
+
+                while (attempts < maxAttempts) {
+                    try {
+                        const response = await fetch(apiUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+
+                        if (response.status === 429) { // Too Many Requests
+                            attempts++;
+                            if (attempts < maxAttempts) {
+                                await new Promise(res => setTimeout(res, delay));
+                                delay *= 2; // Exponential backoff
+                                continue;
+                            } else {
+                                throw new Error("Too many requests. Please try again later.");
+                            }
+                        }
+
+                        if (!response.ok) {
+                            const errorData = await response.json();
+                            throw new Error(`API error: ${response.status} - ${errorData.error.message || response.statusText}`);
+                        }
+
+                        const result = await response.json();
+
+                        if (result.candidates && result.candidates.length > 0 &&
+                            result.candidates[0].content && result.candidates[0].content.parts &&
+                            result.candidates[0].content.parts.length > 0) {
+                            const generatedText = result.candidates[0].content.parts[0].text;
+                            projectDescriptionElement.textContent = generatedText; // Update the description
+                        } else {
+                            showModalMessage("Failed to generate description. Unexpected API response structure.");
+                        }
+                        break; // Exit loop on success
+                    } catch (error) {
+                        showModalMessage("Error generating description: " + error.message);
+                        break; // Exit loop on unrecoverable error
+                    } finally {
+                        spinner.classList.add('hidden');
+                        buttonTextSpan.textContent = 'Generate Description ✨';
+                        this.disabled = false;
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
